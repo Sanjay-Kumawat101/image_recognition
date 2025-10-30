@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azure Vision AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-animation"></div>
+  
+  <div class="container">
+    <div class="header">
+      <h1>VISION AI</h1>
+      <p>Advanced Image Recognition powered by Azure</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" id="uploadForm">
+      <div class="main-grid">
+        <div class="upload-section" id="uploadBox">
+          <div class="upload-icon">🎨</div>
+          <div class="upload-text">Drop your image here</div>
+          <div class="upload-subtext">or click to browse</div>
+          <input type="file" name="image" id="imageInput" accept="image/*" required>
+        </div>
+
+        <div class="preview-section" id="previewSection">
+          <div class="empty-preview" id="emptyPreview">Your image will appear here</div>
+          <img id="previewImg" style="display: none;">
+        </div>
+      </div>
+
+      <button type="submit" class="analyze-btn">🚀 Analyze Image</button>
+    </form>
+
+    {% if result %}
+    <div class="results-section">
+      <h2>✨ Analysis Results</h2>
+      
+      {% if result.get('description') and result['description'].get('captions') %}
+      <div class="result-card">
+        <div class="result-label">Description</div>
+        <div class="result-value">
+          {{ result['description']['captions'][0]['text'] }}
+          <span class="confidence">{{ "%.0f"|format(result['description']['captions'][0]['confidence'] * 100) }}% confident</span>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if result.get('tags') %}
+      <div class="result-card">
+        <div class="result-label">Detected Tags</div>
+        <div class="tags-grid">
+          {% for tag in result['tags'] %}
+          <div class="tag-item">
+            {{ tag['name'] }} <span style="opacity: 0.7;">{{ "%.0f"|format(tag['confidence'] * 100) }}%</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if result.get('objects') %}
+      <div class="result-card">
+        <div class="result-label">Objects Found</div>
+        <div class="tags-grid">
+          {% for obj in result['objects'] %}
+          <div class="tag-item">
+            🎯 {{ obj['object'] }} <span style="opacity: 0.7;">{{ "%.0f"|format(obj['confidence'] * 100) }}%</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
