@@ -16,6 +16,10 @@ jobs:
     permissions:
       contents: read #This is required for actions/checkout
 
+env:
+    subscription_key: ${{ secrets.subscription_key }}
+    endpoint: ${{ secrets.endpoint }} 
+
     steps:
       - uses: actions/checkout@v4
 
@@ -73,4 +77,5 @@ jobs:
         with:
           app-name: 'AIvision'
           slot-name: 'Production'
+
           
