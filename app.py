@@ -4,8 +4,8 @@ import requests, os
 app = Flask(__name__)
 
 # Replace with your Azure endpoint and key
-endpoint = "https://cclproject.cognitiveservices.azure.com/"
-subscription_key = "Evz2GeuMxF8jHY0GOuf2Z0A4ftI084C1W7V9rZlt6Du3DjJvYsdHJQQJ99BJACYeBjFXJ3w3AAAFACOGG6es"
+endpoint = os.getenv("endpoint")
+subscription_key = os.getenv("subscription_key")
 
 analyze_url = endpoint + "/vision/v3.2/analyze"
 
