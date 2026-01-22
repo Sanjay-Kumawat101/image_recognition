@@ -16,10 +16,6 @@ jobs:
     permissions:
       contents: read #This is required for actions/checkout
 
-env:
-    subscription_key: ${{ secrets.subscription_key }}
-    endpoint: ${{ secrets.endpoint }} 
-
     steps:
       - uses: actions/checkout@v4
 
@@ -67,9 +63,9 @@ env:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0ECBFF97C988427AB618062EFD825B76 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FB9079DDD2534E2DA6F97661951245AE }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6045569CBED54211B309E35F22E162CB }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FB99F9A2D62D4EDFAFB8EFFADE21DF62 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_590CF57C0A6646B38EFE0831060C54FB }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_DF84190FA4204C628C21700F55B81F2A }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -77,5 +73,4 @@ env:
         with:
           app-name: 'AIvision'
           slot-name: 'Production'
-
           
