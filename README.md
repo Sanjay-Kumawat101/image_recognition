@@ -1,6 +1,6 @@
 # AI Vision – Object Detection Web Application
 
-🔗 **Live Application:** <aivision-hmdvaafhbdhfawgc.eastus-01.azurewebsites.net>
+🔗 **Live Application:** aivision-hmdvaafhbdhfawgc.eastus-01.azurewebsites.net
 
 ---
 
