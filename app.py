@@ -7,6 +7,9 @@ app = Flask(__name__)
 endpoint = os.getenv("endpoint")
 subscription_key = os.getenv("subscription_key")
 
+print("KEY FOUND:", bool(key))
+print("ENDPOINT FOUND:", bool(endpoint))
+
 analyze_url = endpoint + "/vision/v3.2/analyze"
 
 @app.route("/", methods=["GET", "POST"])
@@ -23,6 +26,10 @@ def index():
         params = {'visualFeatures': 'Description,Tags,Objects'}
 
         response = requests.post(analyze_url, headers=headers, params=params, data=image_data)
+        
+        if response.status_code != 200:
+            print("Azure API Error:", response.text)
+
         result = response.json()
 
     return render_template("index.html", result=result)
