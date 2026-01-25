@@ -7,7 +7,7 @@ app = Flask(__name__)
 endpoint = os.getenv("endpoint")
 subscription_key = os.getenv("subscription_key")
 
-print("KEY FOUND:", bool(key))
+print("KEY FOUND:", bool(subscription_key))
 print("ENDPOINT FOUND:", bool(endpoint))
 
 analyze_url = endpoint + "/vision/v3.2/analyze"
